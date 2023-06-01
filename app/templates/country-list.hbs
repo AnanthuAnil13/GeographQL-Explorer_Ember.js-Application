@@ -1,29 +1,35 @@
 {{page-title "CountryList"}}
 
-<h1>Country List</h1>
+<div class="container">
+  <h1>Country List</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Currency</th>
-      <th>Capital</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each this.model.edges as |edge|}}
-      <tr>
-        <td>{{edge.node.id}}</td>
-        <td><LinkTo  @route='country-detail' @model={{edge.node.id}}>{{edge.node.name}}</LinkTo></td>
-        <td>{{edge.node.currency}}</td>
-        <td>{{edge.node.capital}}</td>
-      </tr>
-    {{/each}}
-  </tbody>
-</table>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Currency</th>
+          <th scope="col">Capital</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        {{#each this.model.edges as |edge|}}
+          <tr>
+            <td scope="row">{{edge.node.id}}</td>
+            <td><LinkTo @route='country-detail' @model={{edge.node.id}}>{{edge.node.name}}</LinkTo></td>
+            <td>{{edge.node.currency}}</td>
+            <td>{{edge.node.capital}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
 
-<button {{on "click" this.previousPage}} disabled={{this.isFirstPage}}>Previous</button>
-<button {{on "click" this.nextPage}} disabled={{this.isLastPage}}>Next</button>
+  <div class="btn-group">
+    <button class="btn btn-outline-primary btn-circle btn-medium" {{on "click" this.previousPage}} disabled={{this.isFirstPage}}>Previous</button>
+    <button class="btn btn-outline-primary btn-circle btn-medium" {{on "click" this.nextPage}} disabled={{this.isLastPage}}>Next</button>
+  </div>
+</div>
 
 {{outlet}}

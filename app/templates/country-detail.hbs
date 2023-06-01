@@ -1,52 +1,56 @@
 {{page-title "CountryDetail"}}
 
-<h1>Country Detail</h1>
+<div class="container">
+  <h1>Country Detail</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Currency</th>
-      <th>Currency Symbol</th>
-      <th>Phone Code</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>{{this.model.name}}</td>
-      <td>{{this.model.currency}}</td>
-      <td>{{this.model.currency_symbol}}</td>
-      <td>{{this.model.phone_code}}</td>
-    </tr>
-  </tbody>
-</table>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Currency</th>
+          <th scope="col">Currency Symbol</th>
+          <th scope="col">Phone Code</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr>
+          <td>{{this.model.name}}</td>
+          <td>{{this.model.currency}}</td>
+          <td>{{this.model.currency_symbol}}</td>
+          <td>{{this.model.phone_code}}</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <h2>States</h2>
+    <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">State Code</th>
+          <th scope="col">Latitude</th>
+          <th scope="col">Longitude</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        {{#each this.model.states.edges as |state|}}
+          <tr>
+            <td>{{state.node.name}}</td>
+            <td>{{state.node.state_code}}</td>
+            <td>{{state.node.latitude}}</td>
+            <td>{{state.node.longitude}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
 
-<h2>States</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>State Code</th>
-      <th>Latitude</th>
-      <th>Longitude</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each this.model.states.edges as |state|}}
-    
-      <tr>
-        <td>{{state.node.name}}</td>
-        <td>{{state.node.state_code}}</td>
-        <td>{{state.node.latitude}}</td>
-        <td>{{state.node.longitude}}</td>
-      </tr>
-    {{/each}}
-  </tbody>
-</table>
-
-<button {{on "click" this.previousPage}} disabled={{this.isFirstPage}}>Previous</button>
-<button {{on "click" this.nextPage}} disabled={{this.isLastPage}}>Next</button>
-
+  <div class="btn-group">
+    <button class="btn btn-outline-primary btn-circle btn-medium" {{on "click" this.previousPage}} disabled={{this.isFirstPage}}>Previous</button>
+    <button class="btn btn-outline-primary btn-circle btn-medium" {{on "click" this.nextPage}} disabled={{this.isLastPage}}>Next</button>
+  </div>
+</div>
 
 {{outlet}}
